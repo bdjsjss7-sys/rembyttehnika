@@ -9,7 +9,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=999">
+<link rel="stylesheet" href="css/styles.css?v=20261025">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- SEO:START -->
+<link rel="canonical" href="https://bdjsjss7-sys.github.io/rembyttehnika/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_BY">
+<meta property="og:site_name" content="РемБытТехника">
+<meta property="og:title" content="РемБытТехника — Ремонт бытовой техники в Гродно">
+<meta property="og:description" content="Мастерская по ремонту бытовой техники в центре Гродно. Стиральные машины, посудомойки, телевизоры, кофемашины, водонагреватели. Ремонт за 1–3 дня, гарантия до 12 месяцев.">
+<meta property="og:url" content="https://bdjsjss7-sys.github.io/rembyttehnika/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LocalBusiness","@id":"https://bdjsjss7-sys.github.io/rembyttehnika/#business","name":"РемБытТехника","url":"https://bdjsjss7-sys.github.io/rembyttehnika/","telephone":"+375291087979","address":{"@type":"PostalAddress","streetAddress":"ул. Большая Троицкая, 48","addressLocality":"Гродно","addressCountry":"BY"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"18:00"}},{"@type":"WebSite","@id":"https://bdjsjss7-sys.github.io/rembyttehnika/#website","url":"https://bdjsjss7-sys.github.io/rembyttehnika/","name":"РемБытТехника","inLanguage":"ru","publisher":{"@id":"https://bdjsjss7-sys.github.io/rembyttehnika/#business"}}]}</script>
+<!-- SEO:END -->
 </head>
 <body>
 
@@ -33,7 +45,7 @@
       </span>
     </div>
     <div class="topbar__right">
-      <span class="topbar__item"><span class="topbar__dot"></span>Открыто · принимаем технику</span>
+      <span class="topbar__item"><span class="topbar__dot"></span>Приём техники · 11:00–18:00</span>
     </div>
   </div>
 </div>
@@ -45,7 +57,7 @@
       <span class="header__logo-mark">Р</span>
       <span class="header__logo-text">РемБытТехника<span class="header__logo-sub">Гродно</span></span>
     </a>
-    <nav class="header__nav" id="nav">
+    <nav class="header__nav" id="nav" aria-label="Основная навигация">
       <a href="services.html">Услуги</a>
       <a href="prices.html">Цены</a>
       <a href="works.html">Работы</a>
@@ -60,7 +72,7 @@
         </svg>
         +375 29 108-79-79
       </a>
-      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -89,7 +101,7 @@
       <p class="hero__subtitle">Принимаем технику в мастерской на Большой Троицкой, 48. Ремонт за 1–3 дня, гарантия до 12 месяцев, оригинальные запчасти.</p>
 
       <div class="hero__cta">
-        <a href="#form" class="btn btn--blue btn--lg">Оставить заявку
+        <a href="tel:+375291087979" class="btn btn--blue btn--lg">Позвонить в мастерскую
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         </a>
         <a href="#services" class="btn btn--outline btn--lg">Посмотреть услуги</a>
@@ -372,31 +384,28 @@
   <div class="container">
     <div class="head">
       <div class="head__left">
-        <div class="head__eyebrow">Заявка</div>
-        <h2 class="head__title">Оставьте заявку — перезвоним</h2>
-        <p class="head__lead">Опишите проблему — мы перезвоним, назовём ориентировочную стоимость и подскажем, когда удобнее привезти технику.</p>
+        <div class="head__eyebrow">Связаться с нами</div>
+        <h2 class="head__title">Обсудим ремонт по телефону</h2>
+        <p class="head__lead">Позвоните и опишите проблему. Подскажем ориентировочную стоимость и когда удобнее привезти технику.</p>
       </div>
     </div>
 
     <div class="form-wrap">
       <div class="form-steps">
-        <div class="form-step"><div class="form-step__num">01</div><div><div class="form-step__title">Оставляете заявку</div><div class="form-step__text">Имя, телефон и короткое описание проблемы.</div></div></div>
-        <div class="form-step"><div class="form-step__num">02</div><div><div class="form-step__title">Перезвоним в течение 30 минут</div><div class="form-step__text">В рабочее время 11:00–18:00. Назовём вилку стоимости.</div></div></div>
+        <div class="form-step"><div class="form-step__num">01</div><div><div class="form-step__title">Звоните в мастерскую</div><div class="form-step__text">Расскажите модель техники и что случилось.</div></div></div>
+        <div class="form-step"><div class="form-step__num">02</div><div><div class="form-step__title">Обсуждаем ремонт</div><div class="form-step__text">Принимаем звонки ежедневно 11:00–18:00. Назовём вилку стоимости.</div></div></div>
         <div class="form-step"><div class="form-step__num">03</div><div><div class="form-step__title">Привозите технику в мастерскую</div><div class="form-step__text">Гродно, Большая Троицкая, 48. Ежедневно с 11:00 до 18:00.</div></div></div>
         <div class="form-step"><div class="form-step__num">04</div><div><div class="form-step__title">Забираете с гарантией</div><div class="form-step__text">После ремонта — с письменным гарантийным талоном до 12 месяцев.</div></div></div>
       </div>
 
-      <form class="form-box" id="lead-form" data-formspree action="#" method="POST">
-        <div class="form-box__title">Оставить заявку</div>
-        <p class="form-box__lead">Перезвоним в течение 30 минут в рабочее время.</p>
-        <div class="form-row"><label for="name">Ваше имя</label><input type="text" id="name" name="name" placeholder="Иван" required></div>
-        <div class="form-row"><label for="phone">Телефон</label><input type="tel" id="phone" name="phone" data-phone placeholder="+375 29 000-00-00" required></div>
-        <div class="form-row"><label for="message">Что случилось с техникой?</label><textarea id="message" name="message" rows="4" placeholder="Например: стиральная машина Bosch не сливает воду, ошибка E15"></textarea></div>
-        <button type="submit" class="btn btn--blue btn--block btn--lg">Отправить заявку
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-        <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a></p>
-      </form>
+      <div class="form-box call-box">
+        <div class="form-box__title">Позвоните в мастерскую</div>
+        <p class="form-box__lead">Обсудим поломку, стоимость диагностики и приём техники.</p>
+        <a class="call-box__phone" href="tel:+375291087979">+375 29 108-79-79</a>
+        <p class="form-box__lead">Ежедневно с 11:00 до 18:00.<br>Гродно, ул. Большая Троицкая, 48.</p>
+        <a href="tel:+375291087979" class="btn btn--blue btn--block btn--lg">Позвонить сейчас</a>
+        <p class="form-note">Принимаем технику в мастерской. На дом не выезжаем. <a href="privacy.html">Политика конфиденциальности</a>.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -416,6 +425,6 @@
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="js/script.js?v=20261025"></script>
 </body>
 </html>

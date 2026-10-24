@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bdjqjs7-sys.github.io/rembytehnika/sitemap.xml
+Sitemap: https://bdjsjss7-sys.github.io/rembyttehnika/sitemap.xml
