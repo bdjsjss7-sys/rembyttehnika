@@ -9,7 +9,7 @@ import json
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = 'https://bdjsjss7-sys.github.io/rembyttehnika/'
+BASE = 'https://rembyttehnika.pro/'
 
 class Page(HTMLParser):
     def __init__(self, text):
