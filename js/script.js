@@ -163,6 +163,7 @@
     if (!header) return;
     var ticking = false;
     function update() {
+      if (document.body.classList.contains('menu-open')) { ticking = false; return; }
       if (window.scrollY > 24) {
         header.classList.add('is-scrolled');
         if (topbar) topbar.classList.add('is-hidden');
@@ -186,22 +187,80 @@
     var burger = document.getElementById('burger');
     var nav = document.getElementById('nav');
     if (!burger || !nav) return;
-    function toggle() {
-      var willOpen = !nav.classList.contains('is-open');
-      burger.classList.toggle('is-open');
-      nav.classList.toggle('is-open');
-      document.body.style.overflow = willOpen ? 'hidden' : '';
+    var mobile = window.matchMedia('(max-width: 1024px)');
+    var header = document.getElementById('header');
+    var lockedStyles = null;
+    var scrollY = 0;
+    var background = [];
+    var opened = false;
+    burger.setAttribute('aria-controls', 'nav');
+
+    function setOpen(open, restoreFocus) {
+      open = open && mobile.matches;
+      if (opened === open) {
+        nav.inert = mobile.matches && !open;
+        burger.setAttribute('aria-expanded', String(open));
+        return;
+      }
+      opened = open;
+      burger.classList.toggle('is-open', open);
+      nav.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      nav.inert = mobile.matches && !open;
+      if (open) {
+        scrollY = window.scrollY;
+        lockedStyles = {};
+        ['position', 'top', 'width', 'overflow'].forEach(function (key) {
+          lockedStyles[key] = document.body.style[key];
+        });
+        document.body.classList.add('menu-open');
+        document.body.style.position = 'fixed';
+        document.body.style.top = -scrollY + 'px';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        background = [];
+        Array.prototype.forEach.call(document.body.children, function (el) {
+          if (el !== header && !/^(SCRIPT|STYLE|LINK)$/.test(el.tagName)) {
+            background.push({ el: el, inert: el.inert });
+            el.inert = true;
+          }
+        });
+      } else {
+        background.forEach(function (item) { item.el.inert = item.inert; });
+        background = [];
+        document.body.classList.remove('menu-open');
+        if (lockedStyles) {
+          Object.keys(lockedStyles).forEach(function (key) { document.body.style[key] = lockedStyles[key]; });
+          lockedStyles = null;
+          var behavior = document.documentElement.style.scrollBehavior;
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, scrollY);
+          document.documentElement.style.scrollBehavior = behavior;
+        }
+        if (restoreFocus) burger.focus({ preventScroll: true });
+      }
     }
-    burger.addEventListener('click', toggle);
-    var links = nav.querySelectorAll('a');
-    for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', function () {
-        if (nav.classList.contains('is-open')) toggle();
-      });
-    }
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) toggle();
+    burger.addEventListener('click', function () { setOpen(!opened, true); });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false, true);
     });
+    document.addEventListener('keydown', function (e) {
+      if (!opened) return;
+      if (e.key === 'Escape') { e.preventDefault(); setOpen(false, true); }
+      if (e.key === 'Tab') {
+        var controls = [burger].concat(Array.prototype.slice.call(nav.querySelectorAll('a[href]')));
+        var index = controls.indexOf(document.activeElement);
+        e.preventDefault();
+        var next = index < 0 ? 0 : (index + (e.shiftKey ? -1 : 1) + controls.length) % controls.length;
+        controls[next].focus();
+      }
+    });
+    function onBreakpoint() { setOpen(false, false); nav.inert = mobile.matches; }
+    if (mobile.addEventListener) mobile.addEventListener('change', onBreakpoint);
+    else mobile.addListener(onBreakpoint);
+    window.addEventListener('pagehide', function () { setOpen(false, false); });
+    onBreakpoint();
   }
 
   /* SMOOTH SCROLL */
@@ -369,6 +428,10 @@
         var form = this;
         var btn = form.querySelector('button[type="submit"]');
         var original = btn ? btn.innerHTML : '';
+        if (!/^https:\/\/formspree\.io\/f\/[a-z0-9]+$/i.test(form.getAttribute('action') || '')) {
+          showMessage(form, 'error', 'Для обращения позвоните: +375 29 108-79-79');
+          return;
+        }
         var data = new FormData(form);
         if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; btn.innerHTML = 'Отправляем...'; }
         fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
@@ -444,7 +507,11 @@
       var href = links[i].getAttribute('href');
       if (!href) continue;
       links[i].classList.remove('is-current');
-      if (href === path) links[i].classList.add('is-current');
+      links[i].removeAttribute('aria-current');
+      if (href === path || (path.indexOf('blog-') === 0 && href === 'blog.html')) {
+        links[i].classList.add('is-current');
+        links[i].setAttribute('aria-current', 'page');
+      }
     }
   }
 

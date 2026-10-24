@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>Запах из барабана стиральной машины | РемБытТехника</title>
+<meta name="description" content="Плесень, накипь, застой воды. Как почистить и как не допустить.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=1001">
+<style>
+  .blog-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .blog-cat { padding: 8px 14px; border-radius: var(--r-full); background: var(--bg-soft); border: 1px solid var(--line); font-size: 13px; font-weight: 500; color: var(--ink-2); cursor: pointer; transition: all 0.2s var(--ease); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; }
+  .blog-cat:hover { border-color: var(--line-3); color: var(--ink); }
+  .blog-cat.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .blog-cat__count { font-family: var(--mono); font-size: 11px; background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 10px; }
+  .blog-cat.is-active .blog-cat__count { background: rgba(255,255,255,0.2); }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .blog-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; transition: all 0.35s var(--ease); color: inherit; min-width: 0; cursor: pointer; text-align: left; font-family: inherit; padding: 0; }
+  .blog-card:hover { border-color: var(--blue-line); transform: translateY(-3px); box-shadow: var(--sh-lg); }
+  .blog-card__cover { aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--blue-soft), var(--bg-tint)); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--line-2); overflow: hidden; }
+  .blog-card__cover svg { width: 48px; height: 48px; stroke-width: 1.25; color: var(--blue); opacity: 0.7; transition: transform 0.5s var(--ease); }
+  .blog-card:hover .blog-card__cover svg { transform: scale(1.1); }
+  .blog-card__body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .blog-card__meta { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-4); }
+  .blog-card__cat { color: var(--blue); }
+  .blog-card__sep { color: var(--ink-4); opacity: 0.5; }
+  .blog-card__title { font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -0.018em; line-height: 1.35; transition: color 0.25s; }
+  .blog-card:hover .blog-card__title { color: var(--blue); }
+  .blog-card__text { font-size: 14px; color: var(--ink-3); line-height: 1.6; flex: 1; }
+  .blog-card__link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--blue); margin-top: 4px; transition: gap 0.3s var(--ease); }
+  .blog-card__link svg { width: 14px; height: 14px; }
+  .blog-card:hover .blog-card__link { gap: 10px; }
+
+  .blog-more-wrap { display: flex; justify-content: center; margin-top: 40px; }
+
+  .article-view { max-width: 760px; margin: 0 auto; display: none; }
+  .article-view.is-open { display: block; }
+  .article-view__back { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--blue); margin-bottom: 32px; cursor: pointer; transition: gap 0.3s var(--ease); background: none; border: none; font-family: inherit; padding: 0; }
+  .article-view__back:hover { gap: 12px; }
+  .article-view__back svg { width: 16px; height: 16px; }
+  .article-view__meta { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 16px; }
+  .article-view__cat { color: var(--blue); }
+  .article-view__title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.15; margin-bottom: 20px; color: var(--ink); }
+  .article-view__lead { font-size: 17px; color: var(--ink-3); line-height: 1.6; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .article-body { font-size: 16px; color: var(--ink-2); line-height: 1.75; }
+  .article-body h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); margin: 36px 0 14px; }
+  .article-body h2:first-child { margin-top: 0; }
+  .article-body p { margin-bottom: 16px; color: var(--ink-2); }
+  .article-body ul, .article-body ol { margin: 0 0 20px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .article-body ul li, .article-body ol li { position: relative; padding-left: 26px; font-size: 15.5px; color: var(--ink-2); line-height: 1.6; }
+  .article-body ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .article-body ol { counter-reset: item; }
+  .article-body ol li { counter-increment: item; }
+  .article-body ol li::before { content: counter(item); position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
+  .article-body strong { color: var(--ink); font-weight: 600; }
+  .article-body blockquote { margin: 24px 0; padding: 18px 22px; background: var(--bg-soft); border-left: 3px solid var(--blue); border-radius: 8px; font-size: 15.5px; color: var(--ink-2); line-height: 1.65; }
+  .article-body blockquote p:last-child { margin-bottom: 0; }
+  .article-cta { margin-top: 48px; padding: 32px 28px; background: var(--ink); border-radius: var(--r-xl); color: #fff; text-align: center; }
+  .article-cta__title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .article-cta__text { font-size: 14.5px; color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.55; }
+  .article-cta__phone { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: var(--blue); color: #fff; border-radius: var(--r); font-size: 16px; font-weight: 600; transition: all 0.2s var(--ease); }
+  .article-cta__phone:hover { background: var(--blue-2); transform: translateY(-1px); box-shadow: var(--sh-blue); }
+
+  @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 768px) {
+    .blog-grid { grid-template-columns: minmax(0, 1fr); }
+    .blog-card__title { font-size: 16px; }
+    .blog-card__body { padding: 20px 18px 22px; }
+    .article-view__title { font-size: 1.6rem; }
+    .article-body { font-size: 15.5px; }
+  }
+  .blog-more-wrap[hidden] { display: none; }
+
+.article-page { padding-top: 140px; }
+@media (max-width: 1024px) { .article-page { padding-top: 96px; } }
+</style>
+<!-- SEO:START -->
+<link rel="canonical" href="https://bdjsjss7-sys.github.io/rembyttehnika/blog-zapah-iz-barabana.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ru_BY">
+<meta property="og:site_name" content="РемБытТехника">
+<meta property="og:title" content="Запах из барабана стиральной машины | РемБытТехника">
+<meta property="og:description" content="Плесень, накипь, застой воды. Как почистить и как не допустить.">
+<meta property="og:url" content="https://bdjsjss7-sys.github.io/rembyttehnika/blog-zapah-iz-barabana.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://bdjsjss7-sys.github.io/rembyttehnika/"},{"@type":"ListItem","position":2,"name":"Блог","item":"https://bdjsjss7-sys.github.io/rembyttehnika/blog.html"},{"@type":"ListItem","position":3,"name":"Запах из барабана стиральной машины","item":"https://bdjsjss7-sys.github.io/rembyttehnika/blog-zapah-iz-barabana.html"}]},{"@type":"Article","headline":"Запах из барабана стиральной машины","description":"Плесень, накипь, застой воды. Как почистить и как не допустить.","inLanguage":"ru","mainEntityOfPage":"https://bdjsjss7-sys.github.io/rembyttehnika/blog-zapah-iz-barabana.html","publisher":{"@type":"LocalBusiness","@id":"https://bdjsjss7-sys.github.io/rembyttehnika/#business","name":"РемБытТехника","url":"https://bdjsjss7-sys.github.io/rembyttehnika/","telephone":"+375291087979","address":{"@type":"PostalAddress","streetAddress":"ул. Большая Троицкая, 48","addressLocality":"Гродно","addressCountry":"BY"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"18:00"}}}]}</script>
+<!-- SEO:END -->
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span class="topbar__item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Гродно, Большая Троицкая, 48
+      </span>
+      <span class="topbar__item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0;"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        Ежедневно 11:00 — 18:00
+      </span>
+    </div>
+    <div class="topbar__right">
+      <span class="topbar__item"><span class="topbar__dot"></span>Приём техники · 11:00–18:00</span>
+    </div>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-mark">Р</span>
+      <span class="header__logo-text">РемБытТехника<span class="header__logo-sub">Гродно</span></span>
+    </a>
+    <nav class="header__nav" id="nav" aria-label="Основная навигация">
+      <a href="services.html">Услуги</a>
+      <a href="prices.html">Цены</a>
+      <a href="works.html">Работы</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html" class="is-current">Блог</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <div class="header__actions">
+      <a href="tel:+375291087979" class="header__phone">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +375 29 108-79-79
+      </a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="section article-page"><div class="container">
+<article class="article-view is-open">
+<nav class="breadcrumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span class="breadcrumbs__sep">/</span><a href="blog.html">Блог</a></nav>
+<a href="blog.html" class="article-view__back">← Ко всем статьям</a>
+<div class="article-view__meta"><span class="article-view__cat">Стиральные машины</span><span>·</span><span>3 мин чтения</span></div>
+<h1 class="article-view__title">Запах из барабана стиральной машины</h1>
+<p class="article-view__lead">Плесень, накипь, застой воды. Как почистить и как не допустить.</p>
+<div class="article-body"><p>Неприятный запах из машины — не поломка, но с ним сталкиваются почти все.</p>
+  <h2>Откуда берётся запах</h2>
+  <ul><li><strong>Манжета люка.</strong> В складках резинки остаётся вода и ворс.</li><li><strong>Лоток для порошка.</strong> Засохший порошок — среда для бактерий.</li><li><strong>Сливной фильтр.</strong> Застой воды с грязью.</li><li><strong>ТЭН.</strong> Накипь впитывает органику.</li></ul>
+  <h2>Что сделать прямо сейчас</h2>
+  <ol><li>Протрите манжету по кругу мыльным раствором.</li><li>Выньте лоток, замочите в горячей воде с содой.</li><li>Промойте сливной фильтр.</li><li>Запустите пустую стирку при 90°C с 100 г лимонной кислоты.</li><li>После стирки — протрите манжету и оставьте дверцу приоткрытой.</li></ol>
+  <h2>Профилактика</h2>
+  <ul><li>Не оставляйте бельё в машине на ночь.</li><li>Раз в месяц — стирка при 90°C с лимонной кислотой.</li><li>Дверца всегда приоткрыта.</li></ul>
+  <blockquote><p>Стойкий запах плесени + тёмные пятна на белье — признак, что плесень добралась до бака. Нужна разборка и профессиональная чистка.</p></blockquote></div>
+<div class="article-cta"><h2 class="article-cta__title">Нужна помощь мастера?</h2><p class="article-cta__text">Позвоните и опишите проблему. Принимаем технику в мастерской ежедневно с 11:00 до 18:00.</p><a href="tel:+375291087979" class="article-cta__phone">+375 29 108-79-79</a></div>
+</article></div></main>
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="index.html" class="footer__brand"><span class="header__logo-mark">Р</span>РемБытТехника</a>
+    <nav class="footer__nav">
+      <a href="services.html">Услуги</a>
+      <a href="prices.html">Цены</a>
+      <a href="works.html">Работы</a>
+      <a href="about.html">О нас</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <div class="footer__copy">© 2025 РемБытТехника · Гродно</div>
+  </div>
+</footer>
+
+<script src="js/script.js?v=20261025"></script>
+</body>
+</html>
