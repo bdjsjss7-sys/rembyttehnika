@@ -17,10 +17,13 @@ const posts = context.window.BLOG_POSTS;
 const view = context.window.BLOG_VIEW;
 if (new Set(posts.map(p => p.slug)).size !== posts.length || posts.some(p => !/^[a-z0-9-]+$/.test(p.slug))) throw new Error('Invalid or duplicate article slug');
 const business = {
-  '@type': 'LocalBusiness', '@id': base + '#business', name: 'РемБытТехника', url: base,
+  '@type': 'LocalBusiness', '@id': base + '#business', name: 'РемБытТехника', legalName: 'ИП Петревич Диана Олеговна', taxID: '591963341', url: base,
   telephone: '+375291087979',
   address: {'@type':'PostalAddress', streetAddress:'ул. Большая Троицкая, 48', addressLocality:'Гродно', addressCountry:'BY'},
-  openingHoursSpecification: {'@type':'OpeningHoursSpecification', dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens:'11:00', closes:'18:00'}
+  openingHoursSpecification: [
+    {'@type':'OpeningHoursSpecification', dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'], opens:'11:00', closes:'18:00'},
+    {'@type':'OpeningHoursSpecification', dayOfWeek:'Saturday', opens:'12:00', closes:'17:00'}
+  ]
 };
 const serviceFiles = new Set(['washing-machines.html','dishwashers.html','tvs.html','coffee-machines.html','vacuum-cleaners.html','water-heaters.html','ovens.html','cooktops.html','hoods.html','gas-stoves.html','small-appliances.html','microwaves.html']);
 function decorate(content, file, post) {
@@ -78,7 +81,7 @@ for (const post of posts) {
 <h1 class="article-view__title">${escape(post.title)}</h1>
 <p class="article-view__lead">${escape(post.excerpt)}</p>
 <div class="article-body">${post.body.replace(/<(\/?)h3>/g,'<$1h2>')}</div>
-<div class="article-cta"><h2 class="article-cta__title">Нужна помощь мастера?</h2><p class="article-cta__text">Позвоните и опишите проблему. Принимаем технику в мастерской ежедневно с 11:00 до 18:00.</p><a href="tel:+375291087979" class="article-cta__phone">+375 29 108-79-79</a></div>
+<div class="article-cta"><h2 class="article-cta__title">Нужна помощь мастера?</h2><p class="article-cta__text">Позвоните и опишите проблему. Принимаем технику: Пн–Пт 11:00–18:00, Сб 12:00–17:00, Вс — выходной.</p><a href="tel:+375291087979" class="article-cta__phone">+375 29 108-79-79</a></div>
 </article></div></main>
 ${footer}<script src="js/script.js?v=20261025"></script>\n</body>\n</html>\n`;
   write(file, decorate(content, file, post));
