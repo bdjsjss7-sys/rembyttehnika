@@ -146,7 +146,7 @@
     small: {
       label: 'Фен',
       issues: [
-        { label: 'Не включается', price: 25 },
+        { label: 'Не включается', price: 30 },
         { label: 'Не греет', price: 30 },
         { label: 'Слабо дует пар', price: 30 },
         { label: 'Течёт вода', price: 30 },
@@ -333,7 +333,7 @@
       if (!issue) return;
       valueEl.style.opacity = '0';
       setTimeout(function () {
-        valueEl.textContent = issue.price + ' BYN';
+        valueEl.textContent = 'от ' + issue.price + ' BYN';
         valueEl.style.opacity = '1';
       }, 120);
     }
